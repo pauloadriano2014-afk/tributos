@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Produto {
+  id           String   @id @default(cuid())
+  ncm          String   @unique
+  cest         String
+  descricao    String
+  mvaOriginal  Float
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
+
+model SimulacaoHistorico {
+  id            String   @id @default(cuid())
+  ncmPesquisado String
+  estadoDestino String
+  mvaAjustada   Float?
+  difal         Float?
+  cst           String
+  cfop          String
+  criadoEm      DateTime @default(now())
+}
